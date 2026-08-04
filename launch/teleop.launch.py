@@ -15,10 +15,14 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time")
     use_joy = LaunchConfiguration("use_joy")
     dev_port = LaunchConfiguration("dev")
-    
+    speed = LaunchConfiguration("speed")
+    turn = LaunchConfiguration("turn")
+
     declare_use_joy = DeclareLaunchArgument("use_joy", default_value="false", description="Use joy or keyboard")
     declare_dev_port = DeclareLaunchArgument("dev_port", default_value="/dev/input/js0", description="Path to joystick dev port")
     declare_use_sim_time = DeclareLaunchArgument("use_sim_time", default_value="false", description="Use simulation (Gazebo) clock if true")
+    declare_speed = DeclareLaunchArgument("speed", default_value="0.2", description="Max linear velocity (m/s)")
+    declare_turn = DeclareLaunchArgument("turn", default_value="0.5", description="Max angular velocity (rad/s)")
 
 
  
@@ -42,7 +46,9 @@ def generate_launch_description():
         emulate_tty=True,
         parameters=[
             {'use_sim_time': use_sim_time},
-            {"joy": use_joy}
+            {"joy": use_joy},
+            {"speed": speed},
+            {"turn": turn}
             ]
     )
     return LaunchDescription(
@@ -50,6 +56,8 @@ def generate_launch_description():
             declare_use_sim_time,
             declare_use_joy,
             declare_dev_port,
+            declare_speed,
+            declare_turn,
             joy,
             champ_teleop
         ]
