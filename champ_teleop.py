@@ -7,6 +7,7 @@ import select
 import sys
 import termios
 import tty
+import math
 
 import numpy as np
 import rclpy
@@ -84,6 +85,7 @@ CTRL-C to quit
                 'i':(1,0,0,0),
                 'o':(1,0,0,-1),
                 'j':(0,0,0,1),
+                'k':(0,0,0,0),
                 'l':(0,0,0,-1),
                 'u':(1,0,0,1),
                 ',':(-1,0,0,0),
@@ -178,8 +180,17 @@ CTRL-C to quit
                     y = self.velocityBindings[key][1]
                     z = self.velocityBindings[key][2]
                     th = self.velocityBindings[key][3]
-                    
-                    if cmd_attempts > 1:
+
+                    if x == 0 and y == 0 and z == 0 and th == 0:
+                        twist = Twist()
+                        twist.linear.x = 0.0
+                        twist.linear.y = 0.0
+                        twist.linear.z = 0.0
+                        twist.angular.x = 0.0
+                        twist.angular.y = 0.0
+                        twist.angular.z = 0.0
+                        self.velocity_publisher.publish(twist)
+                    elif cmd_attempts > 1:
                         twist = Twist()
                         twist.linear.x = x *self.speed
                         twist.linear.y = y * self.speed
