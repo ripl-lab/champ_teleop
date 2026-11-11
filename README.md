@@ -6,7 +6,7 @@ The software has been modified to control the robot's whole-body pose (roll, pit
 ## How to use
 ### Using keyboard:
 
-    roslaunch champ_teleop teleop.launch
+    ros2 launch b2_mujoco b2_mujoco_champ.launch.py
 
 ### Using controller:
 
@@ -20,8 +20,7 @@ If not install:
 
 Terminal 2:
 
-    roslaunch champ_teleop teleop.launch 
-
+    ros2 launch b2_mujoco b2_mujoco_champ.launch.py
 
 ## Controlling the robot with Joystick
 
