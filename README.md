@@ -4,24 +4,34 @@ Champ Quadruped Robot's teleoperation node. This is a forked version of [teleop_
 The software has been modified to control the robot's whole-body pose (roll, pitch, yaw).
 
 ## How to use
+### Using keyboard:
 
     roslaunch champ_teleop teleop.launch
 
-optional paramters for Logitech f710:
+### Using controller:
 
-    roslaunch champ_teleop teleop.launch joy:=true
+Terminal 1:
 
-* Make sure the joystick's switch on top is in 'x' mode.
+    ros2 run joy joy_node
+
+If not install:
+
+    sudo apt install ros-humble-joy
+
+Terminal 2:
+
+    roslaunch champ_teleop teleop.launch 
+
 
 ## Controlling the robot with Joystick
 
 Left Joystick:
-- Up/Down - Linear Velocity X
-- Left/Right - Angular Velocity Z
-- L1 + Left/Right - Linear Velocity Y
+- Left stick up / down - Walk forward / backward
+- Left stick left / right - Turn on the spot
+- LB (hold) + left stick left / right - Strafe sideways instead of turning
 
 Right Joystick:
-- Up/Down - Body's Pitch
-- Left/Right - Body's Roll
-- R1 + Left/Right - Body's Yaw
-- R2 + Up/Down - Body's Z (Height) 
+- Right stick left / right - Tilt the body side to side (roll)
+- RB (hold) + right stick left / right - Twist the body (yaw) instead of rolling
+- Right stick up / down - Tilt the body forward / back (pitch)
+- RT (squeeze) - Lower the body
